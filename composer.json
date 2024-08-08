@@ -1,0 +1,33 @@
+{
+    "name": "wubinworks/module-cosmic-sting-patch",
+    "description": "Magento 2 patch for CVE-2024-34102(aka CosmicSting). Another way(as an extension) to hotfix the security hole if you cannot apply the official patch or cannot upgrade Magento.",
+    "require": {
+        "php": ">=7.4",
+        "laminas/laminas-xml": "~1.4",
+        "magento/framework": "*",
+        "magento/magento2-base": "~2.4.0"
+    },
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "name": "Wubinworks",
+            "email": "wubinworks@outlook.com",
+            "homepage": "https://github.com/wubinworks/magento2-cosmic-sting-patch",
+            "role": "Developer"
+        }
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Wubinworks\\CosmicStingPatch\\": ""
+        }
+    }
+}
