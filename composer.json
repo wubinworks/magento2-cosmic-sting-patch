@@ -1,20 +1,36 @@
 {
     "name": "wubinworks/module-cosmic-sting-patch",
-    "description": "Magento 2 patch for CVE-2024-34102(aka CosmicSting). Another way(as an extension) to hotfix the security hole if you cannot apply the official patch or cannot upgrade Magento.",
+    "description": "Another way(as an extension) to fix CVE-2024-34102(XXE vulnerability) with extra XML Security enhancement. If you cannot upgrade Magento or cannot apply the official patch, this one is an alternative solution.",
+    "keywords": [
+        "cve-2024-34102",
+        "cosmic sting",
+        "cosmicsting",
+        "magento2",
+        "magento 2",
+        "xxe",
+        "xml entity",
+        "xml",
+        "security",
+        "xml security"
+    ],
+    "homepage": "https://www.wubinworks.com",
+    "support": {
+        "issues": "https://github.com/wubinworks/magento2-cosmic-sting-patch/issues",
+        "chat": "https://www.wubinworks.com/contact"
+    },
     "require": {
-        "php": ">=7.4",
-        "laminas/laminas-xml": "~1.4",
-        "magento/framework": "*",
-        "magento/magento2-base": "~2.4.0"
+        "php": ">=7.1",
+        "wubinworks/module-xml-security": "^1.0.1",
+        "magento/magento2-base": "~2.3.0 || ~2.4.0"
     },
     "type": "magento2-module",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "license": "OSL-3.0",
     "authors": [
         {
-            "name": "Wubinworks",
-            "email": "wubinworks@outlook.com",
-            "homepage": "https://github.com/wubinworks/magento2-cosmic-sting-patch",
+            "name": "Wubinworks Dev Team",
+            "email": "extension@wubinworks.com",
+            "homepage": "https://www.wubinworks.com/cosmic-sting-patch.html",
             "role": "Developer"
         }
     ],

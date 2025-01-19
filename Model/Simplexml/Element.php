@@ -5,22 +5,19 @@
  */
 declare(strict_types=1);
 
-namespace Wubinworks\CosmicStingPatch\Framework\Simplexml;
+namespace Wubinworks\CosmicStingPatch\Model\Simplexml;
 
-use Wubinworks\CosmicStingPatch\Xml\Security as XmlSecurity;
+use Magento\Framework\App\ObjectManager;
+use Wubinworks\XmlSecurity\Model\Xml\Security as XmlSecurity;
 
 /**
- * A safer SimpleXMLElement
- * Patch for CVE-2024-34102(aka CosmicSting)
- *
- * @see https://nvd.nist.gov/vuln/detail/CVE-2024-34102
- * @see https://helpx.adobe.com/security/products/magento/apsb24-40.html
- * @see https://experienceleague.adobe.com/en/docs/commerce-knowledge-base/kb/troubleshooting/known-issues-patches-attached/security-update-available-for-adobe-commerce-apsb24-40-revised-to-include-isolated-patch-for-cve-2024-34102
+ * A secure SimpleXMLElement that does not allow ENTITY
+ * An alternative solution for CVE-2024-34102(aka Cosmic Sting)
  */
 class Element extends \Magento\Framework\Simplexml\Element
 {
     /**
-     * PHP SimpleXMLElement constructor
+     * Constructor
      *
      * @param string $data
      * @param int $options
@@ -28,7 +25,7 @@ class Element extends \Magento\Framework\Simplexml\Element
      * @param string $namespaceOrPrefix
      * @param bool $isPrefix
      *
-     * @throws \Laminas\Xml\Exception\InvalidArgumentException
+     * @throws \Wubinworks\CosmicStingPatch\Model\Exception\InvalidArgumentException
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function __construct(
@@ -38,11 +35,14 @@ class Element extends \Magento\Framework\Simplexml\Element
         string $namespaceOrPrefix = "",
         bool $isPrefix = false
     ) {
-        if (XmlSecurity::hasEntity($data)) {
-            throw new \Laminas\Xml\Exception\InvalidArgumentException(
+        /** @var \Magento\Framework\Xml\Security $xmlSecurity */
+        $xmlSecurity = ObjectManager::getInstance()->get(XmlSecurity::class);
+        if (!$xmlSecurity->scan($data)) {
+            throw new \Wubinworks\CosmicStingPatch\Model\Exception\InvalidArgumentException(
                 'Input XML string should not contain ENTITY.'
             );
         }
+
         parent::__construct(
             $data,
             $options,
